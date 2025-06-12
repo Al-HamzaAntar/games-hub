@@ -17,6 +17,8 @@ interface GameCardProps {
 const GameCard = ({ game }: GameCardProps) => {
   const cardBg = useColorModeValue('white', 'gray.800');
   const cardHoverBg = useColorModeValue('gray.50', 'gray.700');
+  const textColor = useColorModeValue('gray.800', 'white');
+  const shadowColor = useColorModeValue('rgba(0,0,0,0.1)', 'rgba(0,0,0,0.3)');
 
   const getRatingColor = (rating: number) => {
     if (rating >= 90) return 'green';
@@ -35,9 +37,11 @@ const GameCard = ({ game }: GameCardProps) => {
       _hover={{
         transform: 'translateY(-4px)',
         bg: cardHoverBg,
-        boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+        boxShadow: `0 10px 25px ${shadowColor}`,
       }}
       position="relative"
+      border="1px"
+      borderColor={useColorModeValue('gray.200', 'transparent')}
     >
       <Box position="relative">
         <Image
@@ -84,7 +88,7 @@ const GameCard = ({ game }: GameCardProps) => {
         <Text
           fontSize="lg"
           fontWeight="bold"
-          color="white"
+          color={textColor}
           noOfLines={2}
           minH="3rem"
         >
@@ -96,7 +100,7 @@ const GameCard = ({ game }: GameCardProps) => {
           {game.platforms.map((platform) => (
             <Box
               key={platform.id}
-              bg="gray.700"
+              bg={useColorModeValue('gray.200', 'gray.700')}
               p={1}
               borderRadius="md"
               title={platform.name}

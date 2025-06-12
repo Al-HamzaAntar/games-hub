@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import GameGrid from '../components/GameGrid';
 import { useGames, useGenres } from '../hooks/useGameData';
+import { useColorModeValue } from '@chakra-ui/react';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,8 +14,10 @@ const Index = () => {
   const { data: games = [], isLoading: gamesLoading, error: gamesError } = useGames(searchQuery, selectedGenre);
   const { data: genres = [], isLoading: genresLoading } = useGenres();
 
+  const bgColor = useColorModeValue('gray.50', 'gray.900');
+
   return (
-    <Box minH="100vh" bg="gray.900">
+    <Box minH="100vh" bg={bgColor}>
       <Header 
         searchQuery={searchQuery} 
         onSearchChange={setSearchQuery} 

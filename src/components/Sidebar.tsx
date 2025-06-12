@@ -18,8 +18,11 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarProps) => {
-  const sidebarBg = useColorModeValue('gray.50', 'gray.900');
+  const sidebarBg = useColorModeValue('white', 'gray.900');
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
   const itemHoverBg = useColorModeValue('gray.100', 'gray.800');
+  const textColor = useColorModeValue('gray.800', 'gray.300');
+  const titleColor = useColorModeValue('gray.600', 'gray.300');
 
   return (
     <Box
@@ -27,13 +30,13 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
       h="calc(100vh - 80px)"
       bg={sidebarBg}
       borderRight="1px"
-      borderColor="gray.700"
+      borderColor={borderColor}
       p={4}
       overflowY="auto"
       position="sticky"
       top="80px"
     >
-      <Text fontSize="xl" fontWeight="bold" mb={6} color="gray.300">
+      <Text fontSize="xl" fontWeight="bold" mb={6} color={titleColor}>
         Genres
       </Text>
       
@@ -57,7 +60,7 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
               <Text fontSize="lg">{genre.icon}</Text>
               <Text
                 flex={1}
-                color={selectedGenre === genre.id ? 'white' : 'gray.300'}
+                color={selectedGenre === genre.id ? 'white' : textColor}
                 fontWeight={selectedGenre === genre.id ? 'semibold' : 'normal'}
               >
                 {genre.name}

@@ -9,6 +9,7 @@ import {
   Text,
   useColorMode,
   HStack,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { Search } from 'lucide-react';
 
@@ -19,12 +20,18 @@ interface HeaderProps {
 
 const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  
+  const headerBg = useColorModeValue('white', 'gray.900');
+  const borderColor = useColorModeValue('gray.200', 'gray.700');
+  const inputBg = useColorModeValue('gray.100', 'gray.800');
+  const textColor = useColorModeValue('gray.800', 'gray.300');
+  const logoColor = useColorModeValue('purple.500', 'purple.500');
 
   return (
     <Box
-      bg="gray.900"
+      bg={headerBg}
       borderBottom="1px"
-      borderColor="gray.700"
+      borderColor={borderColor}
       px={6}
       py={4}
       position="sticky"
@@ -34,7 +41,7 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
       <Flex justify="space-between" align="center">
         <HStack spacing={4}>
           <Box
-            bg="purple.500"
+            bg={logoColor}
             p={2}
             borderRadius="lg"
             display="flex"
@@ -52,7 +59,7 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
               placeholder="Search games..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              bg="gray.800"
+              bg={inputBg}
               border="none"
               _placeholder={{ color: 'gray.400' }}
               _focus={{ boxShadow: '0 0 0 2px purple.500' }}
@@ -61,7 +68,7 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
         </HStack>
 
         <HStack spacing={4}>
-          <Text color="gray.300" fontSize="sm">Dark Mode</Text>
+          <Text color={textColor} fontSize="sm">Dark Mode</Text>
           <Switch
             isChecked={colorMode === 'dark'}
             onChange={toggleColorMode}
