@@ -1,13 +1,42 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState, useMemo } from 'react';
+import { Box, Flex } from '@chakra-ui/react';
+import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import GameGrid from '../components/GameGrid';
+import { games } from '../data/mockData';
 
 const Index = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedGenre, setSelectedGenre] = useState('');
+
+  const filteredGames = useMemo(() => {
+    return games.filter((game) => {
+      const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesGenre = !selectedGenre || game.genre === selectedGenre;
+      return matchesSearch && matchesGenre;
+    });
+  }, [searchQuery, selectedGenre]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <Box minH="100vh" bg="gray.900">
+      <Header 
+        searchQuery={searchQuery} 
+        onSearchChange={setSearchQuery} 
+      />
+      
+      <Flex>
+        <Sidebar 
+          selectedGenre={selectedGenre}
+          onGenreSelect={setSelectedGenre}
+        />
+        
+        <GameGrid 
+          games={filteredGames}
+          selectedGenre={selectedGenre}
+        />
+      </Flex>
+    </Box>
   );
 };
 
