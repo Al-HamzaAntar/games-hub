@@ -1,22 +1,17 @@
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import GameGrid from '../components/GameGrid';
-import { games } from '../data/mockData';
+import { useGames, useGenres } from '../hooks/useGameData';
 
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
 
-  const filteredGames = useMemo(() => {
-    return games.filter((game) => {
-      const matchesSearch = game.title.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesGenre = !selectedGenre || game.genre === selectedGenre;
-      return matchesSearch && matchesGenre;
-    });
-  }, [searchQuery, selectedGenre]);
+  const { data: games = [], isLoading: gamesLoading, error: gamesError } = useGames(searchQuery, selectedGenre);
+  const { data: genres = [], isLoading: genresLoading } = useGenres();
 
   return (
     <Box minH="100vh" bg="gray.900">
@@ -29,11 +24,15 @@ const Index = () => {
         <Sidebar 
           selectedGenre={selectedGenre}
           onGenreSelect={setSelectedGenre}
+          genres={genres}
+          isLoading={genresLoading}
         />
         
         <GameGrid 
-          games={filteredGames}
+          games={games}
           selectedGenre={selectedGenre}
+          isLoading={gamesLoading}
+          error={gamesError}
         />
       </Flex>
     </Box>

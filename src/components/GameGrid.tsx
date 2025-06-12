@@ -6,6 +6,9 @@ import {
   HStack,
   Select,
   VStack,
+  Spinner,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react';
 import { Game } from '../types/game';
 import GameCard from './GameCard';
@@ -13,9 +16,22 @@ import GameCard from './GameCard';
 interface GameGridProps {
   games: Game[];
   selectedGenre: string;
+  isLoading?: boolean;
+  error?: Error | null;
 }
 
-const GameGrid = ({ games, selectedGenre }: GameGridProps) => {
+const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => {
+  if (error) {
+    return (
+      <Box flex={1} p={6}>
+        <Alert status="error">
+          <AlertIcon />
+          Failed to load games. Please try again later.
+        </Alert>
+      </Box>
+    );
+  }
+
   return (
     <Box flex={1} p={6}>
       <VStack spacing={6} align="stretch">
@@ -62,22 +78,29 @@ const GameGrid = ({ games, selectedGenre }: GameGridProps) => {
           </HStack>
         </HStack>
 
-        {/* Games Grid */}
-        {games.length > 0 ? (
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
-            {games.map((game) => (
-              <GameCard key={game.id} game={game} />
-            ))}
-          </SimpleGrid>
-        ) : (
-          <Box
-            textAlign="center"
-            py={20}
-            color="gray.400"
-          >
-            <Text fontSize="xl">No games found</Text>
-            <Text>Try adjusting your search or filters</Text>
+        {/* Loading State */}
+        {isLoading ? (
+          <Box display="flex" justifyContent="center" py={20}>
+            <Spinner size="xl" color="purple.500" />
           </Box>
+        ) : (
+          /* Games Grid */
+          games.length > 0 ? (
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+              {games.map((game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </SimpleGrid>
+          ) : (
+            <Box
+              textAlign="center"
+              py={20}
+              color="gray.400"
+            >
+              <Text fontSize="xl">No games found</Text>
+              <Text>Try adjusting your search or filters</Text>
+            </Box>
+          )
         )}
       </VStack>
     </Box>
