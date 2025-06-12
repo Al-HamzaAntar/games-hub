@@ -9,6 +9,7 @@ import {
   Spinner,
   Alert,
   AlertIcon,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { Game } from '../types/game';
 import GameCard from './GameCard';
@@ -21,6 +22,12 @@ interface GameGridProps {
 }
 
 const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => {
+  const textColor = useColorModeValue('gray.800', 'white');
+  const labelColor = useColorModeValue('gray.600', 'gray.400');
+  const selectBg = useColorModeValue('white', 'gray.800');
+  const selectBorderColor = useColorModeValue('gray.300', 'gray.600');
+  const selectTextColor = useColorModeValue('gray.800', 'white');
+
   if (error) {
     return (
       <Box flex={1} p={6}>
@@ -37,19 +44,22 @@ const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => 
       <VStack spacing={6} align="stretch">
         {/* Header */}
         <HStack justify="space-between" align="center">
-          <Text fontSize="3xl" fontWeight="bold" color="white">
+          <Text fontSize="3xl" fontWeight="bold" color={textColor}>
             Games
           </Text>
           
           <HStack spacing={4}>
             <HStack>
-              <Text color="gray.400" fontSize="sm">Platforms</Text>
+              <Text color={labelColor} fontSize="sm">Platforms</Text>
               <Select
                 size="sm"
-                bg="gray.800"
-                border="none"
-                color="white"
+                bg={selectBg}
+                border="1px solid"
+                borderColor={selectBorderColor}
+                color={selectTextColor}
                 defaultValue="all"
+                _hover={{ borderColor: 'purple.400' }}
+                _focus={{ borderColor: 'purple.500', boxShadow: '0 0 0 1px purple.500' }}
               >
                 <option value="all">All Platforms</option>
                 <option value="pc">PC</option>
@@ -61,13 +71,16 @@ const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => 
             </HStack>
             
             <HStack>
-              <Text color="gray.400" fontSize="sm">Order by:</Text>
+              <Text color={labelColor} fontSize="sm">Order by:</Text>
               <Select
                 size="sm"
-                bg="gray.800"
-                border="none"
-                color="white"
+                bg={selectBg}
+                border="1px solid"
+                borderColor={selectBorderColor}
+                color={selectTextColor}
                 defaultValue="relevance"
+                _hover={{ borderColor: 'purple.400' }}
+                _focus={{ borderColor: 'purple.500', boxShadow: '0 0 0 1px purple.500' }}
               >
                 <option value="relevance">Relevance</option>
                 <option value="rating">Rating</option>
@@ -95,7 +108,7 @@ const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => 
             <Box
               textAlign="center"
               py={20}
-              color="gray.400"
+              color={labelColor}
             >
               <Text fontSize="xl">No games found</Text>
               <Text>Try adjusting your search or filters</Text>
