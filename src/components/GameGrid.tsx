@@ -64,17 +64,17 @@ const GameGrid = ({
           <HStack spacing={4}>
             {/* Platforms Dropdown */}
             <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[180px] bg-background border border-border text-foreground shadow-md hover:bg-accent">
+              <SelectTrigger className="w-[180px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
                 <SelectValue>
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-popover border border-border shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
+              <SelectContent className="bg-white dark:bg-black border border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
                 {platformOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
                     value={option.id}
-                    className="text-popover-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer px-3 py-2 focus:bg-accent focus:text-accent-foreground"
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-800"
                   >
                     {option.label}
                   </SelectItem>
@@ -83,17 +83,17 @@ const GameGrid = ({
             </ShadSelect>
             {/* Order By Dropdown */}
             <ShadSelect value={orderBy} onValueChange={setOrderBy}>
-              <SelectTrigger className="w-[200px] bg-background border border-border text-foreground shadow-md hover:bg-accent">
+              <SelectTrigger className="w-[200px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
                 <SelectValue>
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-popover border border-border shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
+              <SelectContent className="bg-white dark:bg-black border border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
                 {orderOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
                     value={option.id}
-                    className="text-popover-foreground hover:bg-accent hover:text-accent-foreground cursor-pointer px-3 py-2 focus:bg-accent focus:text-accent-foreground"
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-800"
                   >
                     {option.label}
                   </SelectItem>
@@ -108,16 +108,16 @@ const GameGrid = ({
             {Array.from({ length: 12 }).map((_, index) => (
               <Box 
                 key={index}
-                className="bg-card border border-border rounded-xl overflow-hidden"
+                className="bg-white dark:bg-black border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden"
               >
-                <Skeleton className="h-[200px] w-full bg-muted" />
+                <Skeleton className="h-[200px] w-full bg-gray-200 dark:bg-gray-800" />
                 <Box p={4} className="space-y-3">
-                  <Skeleton className="h-6 w-3/4 bg-muted" />
-                  <Skeleton className="h-4 w-1/2 bg-muted" />
+                  <Skeleton className="h-6 w-3/4 bg-gray-200 dark:bg-gray-800" />
+                  <Skeleton className="h-4 w-1/2 bg-gray-200 dark:bg-gray-800" />
                   <div className="flex gap-2">
-                    <Skeleton className="h-6 w-6 rounded-md bg-muted" />
-                    <Skeleton className="h-6 w-6 rounded-md bg-muted" />
-                    <Skeleton className="h-6 w-6 rounded-md bg-muted" />
+                    <Skeleton className="h-6 w-6 rounded-md bg-gray-200 dark:bg-gray-800" />
+                    <Skeleton className="h-6 w-6 rounded-md bg-gray-200 dark:bg-gray-800" />
+                    <Skeleton className="h-6 w-6 rounded-md bg-gray-200 dark:bg-gray-800" />
                   </div>
                 </Box>
               </Box>
