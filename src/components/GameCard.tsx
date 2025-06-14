@@ -13,10 +13,10 @@ interface GameCardProps {
   game: Game;
 }
 
-// Platform icon mapping with uploaded thumbs up image
+// Platform icon mapping with uploaded target/dart image
 const getPlatformIcon = (platformId: string) => {
-  // Using uploaded thumbs up image for all platforms
-  return '/lovable-uploads/6cefc119-9657-4918-abb3-65fa357da1c3.png';
+  // Using uploaded target/dart image for all platforms
+  return '/lovable-uploads/7c94ef73-a904-4061-b365-2b3018de86d3.png';
 };
 
 const GameCard = ({ game }: GameCardProps) => {
