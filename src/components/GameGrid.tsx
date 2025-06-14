@@ -70,18 +70,7 @@ const GameGrid = ({
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent
-                className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto"
-                style={{
-                  backgroundColor: 'white',
-                  color: 'black',
-                  zIndex: 9999,
-                  minWidth: 180,
-                  maxWidth: 260,
-                  overflowY: 'auto',
-                  border: '2px solid #d1d5db'
-                }}
-              >
+              <SelectContent className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
                 {platformOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
@@ -100,18 +89,7 @@ const GameGrid = ({
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent
-                className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto"
-                style={{
-                  backgroundColor: 'white',
-                  color: 'black',
-                  zIndex: 9999,
-                  minWidth: 200,
-                  maxWidth: 300,
-                  overflowY: 'auto',
-                  border: '2px solid #d1d5db'
-                }}
-              >
+              <SelectContent className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
                 {orderOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
