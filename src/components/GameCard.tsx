@@ -1,4 +1,3 @@
-
 import {
   Box,
   Image,
@@ -27,6 +26,11 @@ const GameCard = ({ game }: GameCardProps) => {
     return 'red';
   };
 
+  // Determine which image to show: game's image or placeholder if missing
+  const displayImage = game.image && !game.image.includes('unsplash.com/photo-1542751371-adc38448a05e')
+    ? game.image
+    : '/lovable-uploads/c98b932a-2df8-4fa7-a833-b57a5955c277.png';
+
   return (
     <Box
       bg={cardBg}
@@ -45,7 +49,7 @@ const GameCard = ({ game }: GameCardProps) => {
     >
       <Box position="relative">
         <Image
-          src={game.image}
+          src={displayImage}
           alt={game.title}
           w="100%"
           h="200px"

@@ -24,7 +24,6 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
   const borderColor = useColorModeValue('gray.200', 'gray.700');
   const inputBg = useColorModeValue('gray.100', 'gray.800');
   const textColor = useColorModeValue('gray.800', 'gray.300');
-  const logoColor = useColorModeValue('purple.500', 'purple.500');
 
   return (
     <Box
@@ -40,15 +39,27 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
       <Flex align="center">
         {/* Logo */}
         <Box
-          bg={logoColor}
-          p={2}
+          p={0}
           borderRadius="lg"
           display="flex"
           alignItems="center"
           justifyContent="center"
           mr={4}
+          bg="transparent"
+          minW="44px"
+          minH="44px"
         >
-          <Text fontSize="xl" color="white">🎮</Text>
+          <img
+            src="/lovable-uploads/f1181a47-72bb-4da3-8279-c18e44de76b5.png"
+            alt="Logo"
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 12,
+              objectFit: 'cover',
+              background: 'white'
+            }}
+          />
         </Box>
         
         {/* Search Input */}
@@ -82,4 +93,3 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
 };
 
 export default Header;
-
