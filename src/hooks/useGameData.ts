@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { gameApi } from '../services/gameApi';
 import { transformGame, transformGenre } from '../utils/gameTransformers';
 import { Game, Genre } from '../types/game';
+import staticGenresData from '../data/staticGenres';
 
 export const useGames = (search?: string, genre?: string) => {
   return useQuery({
@@ -19,8 +20,8 @@ export const useGenres = () => {
   return useQuery({
     queryKey: ['genres'],
     queryFn: async () => {
-      const rawGenres = await gameApi.getGenres();
-      const transformedGenres = rawGenres.slice(0, 8).map(transformGenre);
+      // Use static data instead of API call
+      const transformedGenres = staticGenresData.slice(0, 8).map(transformGenre);
       
       // Add "All Games" option at the beginning
       return [
@@ -28,6 +29,6 @@ export const useGenres = () => {
         ...transformedGenres
       ];
     },
-    staleTime: 30 * 60 * 1000, // 30 minutes
+    staleTime: Infinity, // Never refetch since it's static data
   });
 };
