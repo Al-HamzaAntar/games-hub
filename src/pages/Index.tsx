@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import Header from '../components/Header';
@@ -7,7 +8,7 @@ import { useGames, useGenres } from '../hooks/useGameData';
 import { useColorModeValue } from '@chakra-ui/react';
 
 const platformOptions = [
-  { id: '', label: 'All Platforms' },
+  { id: 'all', label: 'All Platforms' },
   { id: 'pc', label: 'PC' },
   { id: 'playstation', label: 'PlayStation' },
   { id: 'xbox', label: 'Xbox' },
@@ -34,12 +35,15 @@ const orderOptions = [
 ];
 
 const Index = () => {
+  // default platform is 'all', not '', same for initial state
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('');
-  const [selectedPlatform, setSelectedPlatform] = useState('');
+  const [selectedPlatform, setSelectedPlatform] = useState('all');
   const [orderBy, setOrderBy] = useState('relevance');
 
-  const { data: games = [], isLoading: gamesLoading, error: gamesError } = useGames(searchQuery, selectedGenre, selectedPlatform, orderBy);
+  // pass platform as undefined if 'all'
+  const platformFilter = selectedPlatform === 'all' ? undefined : selectedPlatform;
+  const { data: games = [], isLoading: gamesLoading, error: gamesError } = useGames(searchQuery, selectedGenre, platformFilter, orderBy);
   const { data: genres = [], isLoading: genresLoading } = useGenres();
 
   const bgColor = useColorModeValue('gray.50', 'gray.900');
