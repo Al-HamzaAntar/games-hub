@@ -7,6 +7,7 @@ import {
   Badge,
   useColorModeValue,
   Spinner,
+  Image,
 } from '@chakra-ui/react';
 import { Genre } from '../types/game';
 
@@ -24,6 +25,17 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
   const textColor = useColorModeValue('gray.800', 'gray.300');
   const titleColor = useColorModeValue('gray.600', 'gray.300');
 
+  // Helper to get the background image for each genre if available (skip for "All Games")
+  // You need to ensure that Genre type has an optional `image_background` field populated for static genres
+  const getGenreImage = (genre: Genre) => {
+    // Try to get static background image for genres except "All Games"
+    if (genre.id && genre.name !== "All Games" && (genre as any).image_background) {
+      return (genre as any).image_background;
+    }
+    // fallback: undefined, don't show image for "All Games"
+    return undefined;
+  };
+
   return (
     <Box
       w="280px"
@@ -39,7 +51,6 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
       <Text fontSize="xl" fontWeight="bold" mb={6} color={titleColor}>
         Genres
       </Text>
-      
       {isLoading ? (
         <Box display="flex" justifyContent="center" mt={8}>
           <Spinner color="purple.500" />
@@ -48,7 +59,7 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
         <VStack spacing={2} align="stretch">
           {genres.map((genre) => (
             <HStack
-              key={genre.id}
+              key={genre.id ?? genre.name}
               p={3}
               borderRadius="lg"
               cursor="pointer"
@@ -56,12 +67,31 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
               _hover={{ bg: selectedGenre === genre.id ? 'purple.600' : itemHoverBg }}
               onClick={() => onGenreSelect(genre.id)}
               transition="all 0.2s"
+              spacing={3}
             >
-              <Text fontSize="lg">{genre.icon}</Text>
+              {/* Show genre image if available, except for "All Games" */}
+              {getGenreImage(genre) ? (
+                <Image
+                  src={getGenreImage(genre)}
+                  alt={genre.name}
+                  boxSize="36px"
+                  borderRadius="md"
+                  objectFit="cover"
+                />
+              ) : (
+                // fallback, just empty div for All Games or no image
+                <Box
+                  w="36px"
+                  h="36px"
+                  borderRadius="md"
+                  bg={itemHoverBg}
+                />
+              )}
               <Text
                 flex={1}
                 color={selectedGenre === genre.id ? 'white' : textColor}
                 fontWeight={selectedGenre === genre.id ? 'semibold' : 'normal'}
+                fontSize="lg"
               >
                 {genre.name}
               </Text>
@@ -83,3 +113,4 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
 };
 
 export default Sidebar;
+
