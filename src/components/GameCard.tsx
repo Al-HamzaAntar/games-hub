@@ -1,4 +1,3 @@
-
 import {
   Box,
   Image,
@@ -14,29 +13,10 @@ interface GameCardProps {
   game: Game;
 }
 
-// Platform icon mapping with modern minimalist style
+// Platform icon mapping with thumbs up emoji
 const getPlatformIcon = (platformId: string) => {
-  const iconMap: Record<string, string> = {
-    'pc': '■', // Simple square for Windows/PC
-    'ps': '●', // Circle for PlayStation
-    'ps4': '●',
-    'ps5': '●',
-    'xbox': '▢', // Outlined square for Xbox
-    'switch': '▣', // Filled square with border for Nintendo
-    'mobile': '▬', // Rectangle for mobile
-    'ios': '▬', // Rectangle for iOS
-    'android': '▬', // Rectangle for Android
-    'web': '◉', // Circle with dot for web
-    'mac': '◆', // Diamond for Mac
-    'linux': '▲', // Triangle for Linux
-    'nintendo': '▣', // Nintendo Switch
-    'atari': '◈', // Diamond outline for Atari
-    'commodore-amiga': '◇', // Diamond outline for Commodore/Amiga
-    'sega': '◎', // Double circle for SEGA
-    '3do': '◐', // Half circle for 3DO
-    'neo-geo': '◑', // Half circle inverted for Neo Geo
-  };
-  return iconMap[platformId] || '●';
+  // Using thumbs up emoji for all platforms
+  return '👍';
 };
 
 const GameCard = ({ game }: GameCardProps) => {
