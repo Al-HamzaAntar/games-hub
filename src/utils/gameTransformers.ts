@@ -1,9 +1,10 @@
+
 import { Game, Genre, Platform } from '../types/game';
 import { RawgGame, RawgGenre } from '../services/gameApi';
 
 // Expanded genreMapping to align with the normalized list
 const platformMapping: Record<string, Platform> = {
-  'PC': { id: 'pc', name: 'PC', icon: '💻' },
+  'PC': { id: 'pc', name: 'PC', icon: '🖥️' },
   'PlayStation': { id: 'ps', name: 'PlayStation', icon: '🎮' },
   'PlayStation 4': { id: 'ps4', name: 'PlayStation 4', icon: '🎮' },
   'PlayStation 5': { id: 'ps5', name: 'PlayStation 5', icon: '🎮' },

@@ -1,3 +1,4 @@
+
 import {
   Box,
   Image,
@@ -12,6 +13,20 @@ import { Game } from '../types/game';
 interface GameCardProps {
   game: Game;
 }
+
+// Platform icon mapping with sleek monochrome style
+const getPlatformIcon = (platformId: string) => {
+  const iconMap: Record<string, string> = {
+    'pc': '⬜', // Windows-like square
+    'ps': '🔳', // PlayStation symbol approximation
+    'ps4': '🔳',
+    'ps5': '🔳',
+    'xbox': '⬛', // Xbox symbol approximation
+    'switch': '🔲', // Nintendo symbol approximation
+    'mobile': '📱', // Mobile/iOS/Android
+  };
+  return iconMap[platformId] || '🎮';
+};
 
 const GameCard = ({ game }: GameCardProps) => {
   const cardBg = useColorModeValue('white', 'gray.800');
@@ -104,12 +119,20 @@ const GameCard = ({ game }: GameCardProps) => {
           {game.platforms.map((platform) => (
             <Box
               key={platform.id}
-              bg={useColorModeValue('gray.200', 'gray.700')}
-              p={1}
+              bg={useColorModeValue('gray.200', 'gray.600')}
+              color={useColorModeValue('gray.700', 'gray.300')}
+              p={2}
               borderRadius="md"
               title={platform.name}
+              minW="32px"
+              minH="32px"
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
             >
-              <Text fontSize="xs">{platform.icon}</Text>
+              <Text fontSize="sm" fontWeight="bold">
+                {getPlatformIcon(platform.id)}
+              </Text>
             </Box>
           ))}
         </HStack>
