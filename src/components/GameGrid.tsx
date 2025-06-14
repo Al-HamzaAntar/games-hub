@@ -1,3 +1,4 @@
+
 import {
   Box,
   SimpleGrid,
@@ -63,12 +64,21 @@ const GameGrid = ({
           <HStack spacing={4}>
             {/* Platforms Dropdown */}
             <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[170px] bg-muted">
+              <SelectTrigger className="w-[180px] bg-muted">
                 <SelectValue>
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-background z-[105]">
+              <SelectContent
+                className="bg-background z-[9999] w-[220px] max-h-72 overflow-auto shadow-xl border border-border"
+                style={{
+                  backgroundColor: 'var(--background, #fff)',
+                  zIndex: 9999,
+                  minWidth: 180,
+                  maxWidth: 260,
+                  overflowY: 'auto'
+                }}
+              >
                 {platformOptions.map(option => (
                   <SelectItem key={option.id} value={option.id}>
                     {option.label}
@@ -78,12 +88,21 @@ const GameGrid = ({
             </ShadSelect>
             {/* Order By Dropdown */}
             <ShadSelect value={orderBy} onValueChange={setOrderBy}>
-              <SelectTrigger className="w-[190px] bg-muted">
+              <SelectTrigger className="w-[200px] bg-muted">
                 <SelectValue>
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-background z-[105]">
+              <SelectContent
+                className="bg-background z-[9999] w-[260px] max-h-72 overflow-auto shadow-xl border border-border"
+                style={{
+                  backgroundColor: 'var(--background, #fff)',
+                  zIndex: 9999,
+                  minWidth: 200,
+                  maxWidth: 300,
+                  overflowY: 'auto'
+                }}
+              >
                 {orderOptions.map(option => (
                   <SelectItem key={option.id} value={option.id}>
                     {option.label}
@@ -122,3 +141,4 @@ const GameGrid = ({
 };
 
 export default GameGrid;
+
