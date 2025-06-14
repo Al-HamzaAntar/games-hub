@@ -1,3 +1,4 @@
+
 import {
   Box,
   Image,
@@ -13,10 +14,19 @@ interface GameCardProps {
   game: Game;
 }
 
-// Platform icon mapping with uploaded target/dart image
+// Platform icon mapping with specific icons for each platform
 const getPlatformIcon = (platformId: string) => {
-  // Using uploaded target/dart image for all platforms
-  return '/lovable-uploads/7c94ef73-a904-4061-b365-2b3018de86d3.png';
+  const iconMap: Record<string, string> = {
+    'pc': '🖥️',
+    'ps': '🎮',
+    'ps4': '🎮',
+    'ps5': '🎮',
+    'xbox': '🎯',
+    'switch': '🕹️',
+    'mobile': '📱',
+  };
+  
+  return iconMap[platformId] || '🎮'; // fallback to generic gaming icon
 };
 
 const GameCard = ({ game }: GameCardProps) => {
@@ -123,13 +133,9 @@ const GameCard = ({ game }: GameCardProps) => {
               border="1px solid"
               borderColor={useColorModeValue('gray.200', 'gray.600')}
             >
-              <Image
-                src={getPlatformIcon(platform.id)}
-                alt={platform.name}
-                w="16px"
-                h="16px"
-                objectFit="contain"
-              />
+              <Text fontSize="16px">
+                {getPlatformIcon(platform.id)}
+              </Text>
             </Box>
           ))}
         </HStack>
