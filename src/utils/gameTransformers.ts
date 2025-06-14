@@ -27,6 +27,15 @@ const genreMapping: Record<string, { icon: string; id: string }> = {
   'Simulation': { icon: '🏗️', id: 'simulation' },
   'Indie': { icon: '🎨', id: 'indie' },
   'Casual': { icon: '🎯', id: 'casual' },
+  'Puzzle': { icon: '🧩', id: 'puzzle' },
+  'Arcade': { icon: '🕹️', id: 'arcade' },
+  'Platformer': { icon: '🪜', id: 'platformer' },
+  'Massively Multiplayer': { icon: '🌐', id: 'massively-multiplayer' },
+  'Fighting': { icon: '👊', id: 'fighting' },
+  'Family': { icon: '👨‍👩‍👧‍👦', id: 'family' },
+  'Board Games': { icon: '🎲', id: 'board-games' },
+  'Educational': { icon: '📚', id: 'educational' },
+  'Card': { icon: '🃏', id: 'card' },
 };
 
 export const transformGame = (rawgGame: RawgGame): Game => {

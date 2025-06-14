@@ -20,8 +20,8 @@ export const useGenres = () => {
   return useQuery({
     queryKey: ['genres'],
     queryFn: async () => {
-      // Use static data instead of API call
-      const transformedGenres = staticGenresData.slice(0, 8).map(transformGenre);
+      // Use all static data instead of limiting to 8
+      const transformedGenres = staticGenresData.map(transformGenre);
       
       // Add "All Games" option at the beginning
       return [
