@@ -359,5 +359,194 @@ export default [
         "added": 7333
       }
     ]
+  },
+  {
+    "id": 7,
+    "name": "Puzzle",
+    "slug": "puzzle",
+    "games_count": 97313,
+    "image_background": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 4200,
+        "slug": "portal-2",
+        "name": "Portal 2",
+        "added": 17084
+      },
+      {
+        "id": 13536,
+        "slug": "portal",
+        "name": "Portal",
+        "added": 14517
+      },
+      {
+        "id": 1030,
+        "slug": "limbo",
+        "name": "Limbo",
+        "added": 12272
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Arcade",
+    "slug": "arcade",
+    "games_count": 22659,
+    "image_background": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 3272,
+        "slug": "rocket-league",
+        "name": "Rocket League",
+        "added": 11164
+      },
+      {
+        "id": 326292,
+        "slug": "fall-guys",
+        "name": "Fall Guys: Ultimate Knockout",
+        "added": 7532
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "name": "Platformer",
+    "slug": "platformer",
+    "games_count": 100784,
+    "image_background": "https://images.unsplash.com/photo-1472396961693-142e6e269027?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 1030,
+        "slug": "limbo",
+        "name": "Limbo",
+        "added": 12272
+      },
+      {
+        "id": 422,
+        "slug": "terraria",
+        "name": "Terraria",
+        "added": 10975
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Racing",
+    "slug": "racing",
+    "games_count": 24956,
+    "image_background": "https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 3272,
+        "slug": "rocket-league",
+        "name": "Rocket League",
+        "added": 11164
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Fighting",
+    "slug": "fighting",
+    "games_count": 11760,
+    "image_background": "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 9830,
+        "slug": "brawlhalla",
+        "name": "Brawlhalla",
+        "added": 6465
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Sports",
+    "slug": "sports",
+    "games_count": 21254,
+    "image_background": "https://images.unsplash.com/photo-1452378174528-3090a4bba7b2?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 3272,
+        "slug": "rocket-league",
+        "name": "Rocket League",
+        "added": 11164
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "name": "Massively Multiplayer",
+    "slug": "massively-multiplayer",
+    "games_count": 3505,
+    "image_background": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 11147,
+        "slug": "ark-survival-of-the-fittest",
+        "name": "ARK: Survival Of The Fittest",
+        "added": 6962
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Family",
+    "slug": "family",
+    "games_count": 5395,
+    "image_background": "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 3328,
+        "slug": "the-witcher-3-wild-hunt",
+        "name": "The Witcher 3: Wild Hunt",
+        "added": 18127
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Board Games",
+    "slug": "board-games",
+    "games_count": 8378,
+    "image_background": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 23557,
+        "slug": "gwent-the-witcher-card-game",
+        "name": "Gwent: The Witcher Card Game",
+        "added": 4380
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Educational",
+    "slug": "educational",
+    "games_count": 15684,
+    "image_background": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 1842,
+        "slug": "minecraft-story-mode",
+        "name": "Minecraft: Story Mode",
+        "added": 4168
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Card",
+    "slug": "card",
+    "games_count": 4529,
+    "image_background": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop",
+    "games": [
+      {
+        "id": 28121,
+        "slug": "slay-the-spire",
+        "name": "Slay the Spire",
+        "added": 4366
+      }
+    ]
   }
 ];
