@@ -1,4 +1,3 @@
-
 const API_KEY = '0021430af2644b4397b6ab1b9916d250';
 const BASE_URL = 'https://api.rawg.io/api';
 
@@ -24,7 +23,7 @@ export interface RawgGenre {
 }
 
 export const gameApi = {
-  async getGames(search?: string, genre?: string, page: number = 1): Promise<RawgGame[]> {
+  async getGames(search?: string, genre?: string, page: number = 1, platform?: string, ordering?: string): Promise<RawgGame[]> {
     const params = new URLSearchParams({
       key: API_KEY,
       page: page.toString(),
@@ -37,6 +36,14 @@ export const gameApi = {
 
     if (genre) {
       params.append('genres', genre);
+    }
+
+    if (platform && platform !== '') {
+      params.append('platforms', platform);
+    }
+
+    if (ordering && ordering !== 'relevance') {
+      params.append('ordering', ordering);
     }
 
     const response = await fetch(`${BASE_URL}/games?${params}`);

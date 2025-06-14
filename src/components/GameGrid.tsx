@@ -1,10 +1,8 @@
-
 import {
   Box,
   SimpleGrid,
   Text,
   HStack,
-  Select,
   VStack,
   Spinner,
   Alert,
@@ -13,21 +11,36 @@ import {
 } from '@chakra-ui/react';
 import { Game } from '../types/game';
 import GameCard from './GameCard';
+import { Select as ShadSelect, SelectTrigger, SelectContent, SelectItem, SelectValue } from './ui/select';
 
 interface GameGridProps {
   games: Game[];
   selectedGenre: string;
   isLoading?: boolean;
   error?: Error | null;
+  selectedPlatform: string;
+  setSelectedPlatform: (id: string) => void;
+  orderBy: string;
+  setOrderBy: (id: string) => void;
+  platformOptions: { id: string; label: string }[];
+  orderOptions: { id: string; label: string }[];
 }
 
-const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => {
+const GameGrid = ({
+  games,
+  selectedGenre,
+  isLoading,
+  error,
+  selectedPlatform,
+  setSelectedPlatform,
+  orderBy,
+  setOrderBy,
+  platformOptions,
+  orderOptions,
+}: GameGridProps) => {
   const textColor = useColorModeValue('gray.800', 'white');
   const labelColor = useColorModeValue('gray.600', 'gray.400');
-  const selectBg = useColorModeValue('white', 'gray.800');
-  const selectBorderColor = useColorModeValue('gray.300', 'gray.600');
-  const selectTextColor = useColorModeValue('gray.800', 'white');
-
+  
   if (error) {
     return (
       <Box flex={1} p={6}>
@@ -47,57 +60,45 @@ const GameGrid = ({ games, selectedGenre, isLoading, error }: GameGridProps) => 
           <Text fontSize="3xl" fontWeight="bold" color={textColor}>
             Games
           </Text>
-          
           <HStack spacing={4}>
-            <HStack>
-              <Text color={labelColor} fontSize="sm">Platforms</Text>
-              <Select
-                size="sm"
-                bg={selectBg}
-                border="1px solid"
-                borderColor={selectBorderColor}
-                color={selectTextColor}
-                defaultValue="all"
-                _hover={{ borderColor: 'purple.400' }}
-                _focus={{ borderColor: 'purple.500', boxShadow: '0 0 0 1px purple.500' }}
-              >
-                <option value="all">All Platforms</option>
-                <option value="pc">PC</option>
-                <option value="ps">PlayStation</option>
-                <option value="xbox">Xbox</option>
-                <option value="switch">Nintendo Switch</option>
-                <option value="mobile">Mobile</option>
-              </Select>
-            </HStack>
-            
-            <HStack>
-              <Text color={labelColor} fontSize="sm">Order by:</Text>
-              <Select
-                size="sm"
-                bg={selectBg}
-                border="1px solid"
-                borderColor={selectBorderColor}
-                color={selectTextColor}
-                defaultValue="relevance"
-                _hover={{ borderColor: 'purple.400' }}
-                _focus={{ borderColor: 'purple.500', boxShadow: '0 0 0 1px purple.500' }}
-              >
-                <option value="relevance">Relevance</option>
-                <option value="rating">Rating</option>
-                <option value="release">Release Date</option>
-                <option value="popularity">Popularity</option>
-              </Select>
-            </HStack>
+            {/* Platforms Dropdown */}
+            <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
+              <SelectTrigger className="w-[170px] bg-muted">
+                <SelectValue>
+                  {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="bg-background z-[105]">
+                {platformOptions.map(option => (
+                  <SelectItem key={option.id} value={option.id}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </ShadSelect>
+            {/* Order By Dropdown */}
+            <ShadSelect value={orderBy} onValueChange={setOrderBy}>
+              <SelectTrigger className="w-[190px] bg-muted">
+                <SelectValue>
+                  {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="bg-background z-[105]">
+                {orderOptions.map(option => (
+                  <SelectItem key={option.id} value={option.id}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </ShadSelect>
           </HStack>
         </HStack>
-
         {/* Loading State */}
         {isLoading ? (
           <Box display="flex" justifyContent="center" py={20}>
             <Spinner size="xl" color="purple.500" />
           </Box>
         ) : (
-          /* Games Grid */
           games.length > 0 ? (
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
               {games.map((game) => (

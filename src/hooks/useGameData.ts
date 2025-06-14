@@ -1,4 +1,3 @@
-
 import { useQuery } from '@tanstack/react-query';
 import { gameApi } from '../services/gameApi';
 import { transformGame, transformGenre } from '../utils/gameTransformers';
@@ -28,11 +27,11 @@ const GENRE_ORDER_AND_LABELS = [
   { id: 'card', label: 'Card' },
 ];
 
-export const useGames = (search?: string, genre?: string) => {
+export const useGames = (search?: string, genre?: string, platform?: string, ordering?: string) => {
   return useQuery({
-    queryKey: ['games', search, genre],
+    queryKey: ['games', search, genre, platform, ordering],
     queryFn: async () => {
-      const rawGames = await gameApi.getGames(search, genre || undefined);
+      const rawGames = await gameApi.getGames(search, genre || undefined, 1, platform, ordering);
       return rawGames.map(transformGame);
     },
     staleTime: 5 * 60 * 1000,
@@ -75,4 +74,3 @@ export const useGenres = () => {
     staleTime: Infinity,
   });
 };
-
