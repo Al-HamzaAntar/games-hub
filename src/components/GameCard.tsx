@@ -13,10 +13,10 @@ interface GameCardProps {
   game: Game;
 }
 
-// Platform icon mapping with thumbs up emoji
+// Platform icon mapping with uploaded thumbs up image
 const getPlatformIcon = (platformId: string) => {
-  // Using thumbs up emoji for all platforms
-  return '👍';
+  // Using uploaded thumbs up image for all platforms
+  return '/lovable-uploads/6cefc119-9657-4918-abb3-65fa357da1c3.png';
 };
 
 const GameCard = ({ game }: GameCardProps) => {
@@ -123,9 +123,13 @@ const GameCard = ({ game }: GameCardProps) => {
               border="1px solid"
               borderColor={useColorModeValue('gray.200', 'gray.600')}
             >
-              <Text fontSize="md" fontWeight="normal" fontFamily="monospace">
-                {getPlatformIcon(platform.id)}
-              </Text>
+              <Image
+                src={getPlatformIcon(platform.id)}
+                alt={platform.name}
+                w="16px"
+                h="16px"
+                objectFit="contain"
+              />
             </Box>
           ))}
         </HStack>
