@@ -2,6 +2,7 @@
 import { Game, Genre, Platform } from '../types/game';
 import { RawgGame, RawgGenre } from '../services/gameApi';
 
+// Expanded genreMapping to align with the normalized list
 const platformMapping: Record<string, Platform> = {
   'PC': { id: 'pc', name: 'PC', icon: '💻' },
   'PlayStation': { id: 'ps', name: 'PlayStation', icon: '🎮' },
@@ -17,20 +18,21 @@ const platformMapping: Record<string, Platform> = {
 
 const genreMapping: Record<string, { icon: string; id: string }> = {
   'Action': { icon: '⚔️', id: 'action' },
+  'Indie': { icon: '🎨', id: 'indie' },
   'Adventure': { icon: '🗺️', id: 'adventure' },
   'RPG': { icon: '🗡️', id: 'rpg' },
   'Role-playing (RPG)': { icon: '🗡️', id: 'rpg' },
-  'Shooter': { icon: '🔫', id: 'shooter' },
   'Strategy': { icon: '♟️', id: 'strategy' },
-  'Sports': { icon: '⚽', id: 'sports' },
-  'Racing': { icon: '🏎️', id: 'racing' },
-  'Simulation': { icon: '🏗️', id: 'simulation' },
-  'Indie': { icon: '🎨', id: 'indie' },
+  'Shooter': { icon: '🔫', id: 'shooter' },
   'Casual': { icon: '🎯', id: 'casual' },
+  'Simulation': { icon: '🏗️', id: 'simulation' },
+  'Simulator': { icon: '🏗️', id: 'simulation' }, // for display
   'Puzzle': { icon: '🧩', id: 'puzzle' },
   'Arcade': { icon: '🕹️', id: 'arcade' },
   'Platformer': { icon: '🪜', id: 'platformer' },
+  'Racing': { icon: '🏎️', id: 'racing' },
   'Massively Multiplayer': { icon: '🌐', id: 'massively-multiplayer' },
+  'Sports': { icon: '⚽', id: 'sports' },
   'Fighting': { icon: '👊', id: 'fighting' },
   'Family': { icon: '👨‍👩‍👧‍👦', id: 'family' },
   'Board Games': { icon: '🎲', id: 'board-games' },
@@ -43,8 +45,9 @@ export const transformGame = (rawgGame: RawgGame): Game => {
     ?.map(p => platformMapping[p.platform.name])
     .filter(Boolean) || [];
 
-  const primaryGenre = rawgGame.genres?.[0]?.name || 'action';
-  const genreId = genreMapping[primaryGenre]?.id || 'action';
+  // Try to match genre using genreMappings, fallback to first genre or "action"
+  const primaryGenreRaw = rawgGame.genres?.[0]?.name || 'Action';
+  const genreId = genreMapping[primaryGenreRaw]?.id || primaryGenreRaw.toLowerCase() || 'action';
 
   return {
     id: rawgGame.id.toString(),
@@ -52,15 +55,15 @@ export const transformGame = (rawgGame: RawgGame): Game => {
     image: rawgGame.background_image || 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=200&fit=crop',
     rating: Math.round((rawgGame.metacritic || rawgGame.rating * 20)),
     genre: genreId,
-    platforms: platforms.slice(0, 4), // Limit to 4 platforms for UI
-    isTargeted: Math.random() > 0.7, // Random for demo
+    platforms: platforms.slice(0, 4),
+    isTargeted: Math.random() > 0.7,
     isRecommended: rawgGame.rating > 4.0,
   };
 };
 
 export const transformGenre = (rawgGenre: RawgGenre): Genre => {
-  const mapping = genreMapping[rawgGenre.name] || { icon: '🎮', id: rawgGenre.name.toLowerCase() };
-  
+  const mapping = genreMapping[rawgGenre.name] || { icon: '🎮', id: (rawgGenre.slug || rawgGenre.name).toLowerCase() };
+
   return {
     id: mapping.id,
     name: rawgGenre.name,

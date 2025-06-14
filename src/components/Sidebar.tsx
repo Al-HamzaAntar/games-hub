@@ -25,14 +25,10 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
   const textColor = useColorModeValue('gray.800', 'gray.300');
   const titleColor = useColorModeValue('gray.600', 'gray.300');
 
-  // Helper to get the background image for each genre if available (skip for "All Games")
-  // You need to ensure that Genre type has an optional `image_background` field populated for static genres
   const getGenreImage = (genre: Genre) => {
-    // Try to get static background image for genres except "All Games"
     if (genre.id && genre.name !== "All Games" && (genre as any).image_background) {
       return (genre as any).image_background;
     }
-    // fallback: undefined, don't show image for "All Games"
     return undefined;
   };
 
@@ -69,7 +65,6 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
               transition="all 0.2s"
               spacing={3}
             >
-              {/* Show genre image if available, except for "All Games" */}
               {getGenreImage(genre) ? (
                 <Image
                   src={getGenreImage(genre)}
@@ -79,7 +74,6 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
                   objectFit="cover"
                 />
               ) : (
-                // fallback, just empty div for All Games or no image
                 <Box
                   w="36px"
                   h="36px"
@@ -113,4 +107,3 @@ const Sidebar = ({ selectedGenre, onGenreSelect, genres, isLoading }: SidebarPro
 };
 
 export default Sidebar;
-
