@@ -1,3 +1,4 @@
+
 import {
   Box,
   SimpleGrid,
@@ -63,7 +64,7 @@ const GameGrid = ({
           <HStack spacing={4}>
             {/* Platforms Dropdown */}
             <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[180px] bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-500 text-gray-900 dark:text-gray-100 shadow-md">
+              <SelectTrigger className="w-[180px] bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 shadow-md">
                 <SelectValue>
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
@@ -82,7 +83,7 @@ const GameGrid = ({
             </ShadSelect>
             {/* Order By Dropdown */}
             <ShadSelect value={orderBy} onValueChange={setOrderBy}>
-              <SelectTrigger className="w-[200px] bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-500 text-gray-900 dark:text-gray-100 shadow-md">
+              <SelectTrigger className="w-[200px] bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 shadow-md">
                 <SelectValue>
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
