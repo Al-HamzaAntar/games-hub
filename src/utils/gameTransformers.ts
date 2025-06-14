@@ -1,4 +1,3 @@
-
 import { Game, Genre, Platform } from '../types/game';
 import { RawgGame, RawgGenre } from '../services/gameApi';
 
@@ -61,13 +60,21 @@ export const transformGame = (rawgGame: RawgGame): Game => {
   };
 };
 
-export const transformGenre = (rawgGenre: RawgGenre): Genre => {
-  const mapping = genreMapping[rawgGenre.name] || { icon: '🎮', id: (rawgGenre.slug || rawgGenre.name).toLowerCase() };
+/**
+ * Transform a RAWG genre or static genre data to our Genre type.
+ * Accepts optional id/label to override when matching staticGenres.
+ */
+export const transformGenre = (rawgGenre: RawgGenre & { image_background?: string }, idOverride?: string, nameOverride?: string): Genre => {
+  // Only use id, name, games_count (plus optional image_background from static)
+  // If idOverride provided, use that; else derive from name
+  const mappingId = idOverride || (rawgGenre.name ? rawgGenre.name.toLowerCase().replace(/ /g, '-') : '');
+  const mapping = genreMapping[nameOverride || rawgGenre.name] || { icon: '🎮', id: mappingId };
 
   return {
     id: mapping.id,
-    name: rawgGenre.name,
+    name: nameOverride || rawgGenre.name,
     icon: mapping.icon,
     count: rawgGenre.games_count,
+    // Don't add slug/reference that's not in the type
   };
 };

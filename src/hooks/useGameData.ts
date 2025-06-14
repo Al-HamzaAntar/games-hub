@@ -5,7 +5,7 @@ import { transformGame, transformGenre } from '../utils/gameTransformers';
 import { Game, Genre } from '../types/game';
 import staticGenresData from '../data/staticGenres';
 
-// Hardcoded genre list in exact order you want, mapping staticGenres by name.
+// 19 genres, in your required order & naming
 const GENRE_ORDER_AND_LABELS = [
   { id: 'action', label: 'Action' },
   { id: 'indie', label: 'Indie' },
@@ -14,7 +14,7 @@ const GENRE_ORDER_AND_LABELS = [
   { id: 'strategy', label: 'Strategy' },
   { id: 'shooter', label: 'Shooter' },
   { id: 'casual', label: 'Casual' },
-  { id: 'simulation', label: 'Simulator' }, // note: handle slug/case mismatch!
+  { id: 'simulation', label: 'Simulation' }, // note spelling!
   { id: 'puzzle', label: 'Puzzle' },
   { id: 'arcade', label: 'Arcade' },
   { id: 'platformer', label: 'Platformer' },
@@ -29,15 +29,13 @@ const GENRE_ORDER_AND_LABELS = [
 ];
 
 export const useGames = (search?: string, genre?: string) => {
-  // Use string id (like "action") for consistent filtering.
   return useQuery({
     queryKey: ['games', search, genre],
     queryFn: async () => {
-      // Genre filtering will work if we supply genre as string id as in the mapping
       const rawGames = await gameApi.getGames(search, genre || undefined);
       return rawGames.map(transformGame);
     },
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 5 * 60 * 1000,
   });
 };
 
@@ -45,35 +43,36 @@ export const useGenres = () => {
   return useQuery({
     queryKey: ['genres'],
     queryFn: async () => {
-      // Map staticGenresData into our normalized genre list.
+      // Map the static data so that every required genre appears in the correct order
       const genres: Genre[] = GENRE_ORDER_AND_LABELS.map(({ id, label }) => {
-        // Try to find a genre from static for image and count
+        // Find a genre whose name matches label, case-insensitive
         const staticGenre = staticGenresData.find(
-          (g: any) => {
-            // Some static genres have "role-playing-games-rpg" for RPG,
-            // we'll map by lowercased name, falling back as needed
-            const slugMatch = (g.slug || '').replace(/-/g,'').toLowerCase();
-            const idMatch = id.replace(/-/g,'').toLowerCase();
-            return slugMatch === idMatch || (g.name || '').replace(/-/g,'').toLowerCase() === idMatch;
-          }
+          (g: any) => (g.name || '').toLowerCase() === (label.toLowerCase())
         );
-        const transformed = staticGenre ? transformGenre(staticGenre) : {
-          id, name: label, icon: '🎮', count: 0,
-        };
-        // patch in "image_background" so sidebar can use covers
-        return {
-          ...transformed,
-          name: label,
-          image_background: staticGenre?.image_background,
-        };
+        // Use staticGenre's image/count if found, else fallback
+        if (staticGenre) {
+          // Use transformer for icons/count, but patch image_background through
+          const transformed = transformGenre(staticGenre, id, label);
+          return {
+            ...transformed,
+            name: label,
+            image_background: staticGenre.image_background,
+          };
+        } else {
+          // No static genre data, fallback to generic
+          return {
+            id,
+            name: label,
+            icon: '🎮',
+            count: 0,
+          };
+        }
       });
 
-      // Add "All Games" option at the beginning
-      return [
-        { id: '', name: 'All Games', icon: '🎮', count: 0 },
-        ...genres
-      ];
+      // Add "All Games" at the top for user convenience
+      return [{ id: '', name: 'All Games', icon: '🎮', count: 0 }, ...genres];
     },
     staleTime: Infinity,
   });
 };
+
