@@ -1,11 +1,9 @@
-
 import {
   Box,
   SimpleGrid,
   Text,
   HStack,
   VStack,
-  Spinner,
   Alert,
   AlertIcon,
   useColorModeValue,
@@ -13,6 +11,7 @@ import {
 import { Game } from '../types/game';
 import GameCard from './GameCard';
 import { Select as ShadSelect, SelectTrigger, SelectContent, SelectItem, SelectValue } from './ui/select';
+import { Skeleton } from './ui/skeleton';
 
 interface GameGridProps {
   games: Game[];
@@ -104,9 +103,25 @@ const GameGrid = ({
         </HStack>
         {/* Loading State */}
         {isLoading ? (
-          <Box display="flex" justifyContent="center" py={20}>
-            <Spinner size="xl" color="purple.500" />
-          </Box>
+          <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+            {Array.from({ length: 12 }).map((_, index) => (
+              <Box 
+                key={index}
+                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700"
+              >
+                <Skeleton className="h-[200px] w-full" />
+                <Box p={4} className="space-y-3">
+                  <Skeleton className="h-6 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                  <div className="flex gap-2">
+                    <Skeleton className="h-6 w-6 rounded-md" />
+                    <Skeleton className="h-6 w-6 rounded-md" />
+                    <Skeleton className="h-6 w-6 rounded-md" />
+                  </div>
+                </Box>
+              </Box>
+            ))}
+          </SimpleGrid>
         ) : (
           games.length > 0 ? (
             <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
