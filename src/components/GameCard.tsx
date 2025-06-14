@@ -14,18 +14,18 @@ interface GameCardProps {
   game: Game;
 }
 
-// Platform icon mapping with sleek monochrome style
+// Platform icon mapping with modern minimalist style
 const getPlatformIcon = (platformId: string) => {
   const iconMap: Record<string, string> = {
-    'pc': '⬜', // Windows-like square
-    'ps': '🔳', // PlayStation symbol approximation
-    'ps4': '🔳',
-    'ps5': '🔳',
-    'xbox': '⬛', // Xbox symbol approximation
-    'switch': '🔲', // Nintendo symbol approximation
-    'mobile': '📱', // Mobile/iOS/Android
+    'pc': '■', // Simple square for Windows/PC
+    'ps': '●', // Circle for PlayStation
+    'ps4': '●',
+    'ps5': '●',
+    'xbox': '▢', // Outlined square for Xbox
+    'switch': '▣', // Filled square with border for Nintendo
+    'mobile': '▬', // Rectangle for mobile
   };
-  return iconMap[platformId] || '🎮';
+  return iconMap[platformId] || '●';
 };
 
 const GameCard = ({ game }: GameCardProps) => {
@@ -119,18 +119,20 @@ const GameCard = ({ game }: GameCardProps) => {
           {game.platforms.map((platform) => (
             <Box
               key={platform.id}
-              bg={useColorModeValue('gray.200', 'gray.600')}
-              color={useColorModeValue('gray.700', 'gray.300')}
+              bg={useColorModeValue('gray.100', 'gray.700')}
+              color={useColorModeValue('gray.600', 'gray.400')}
               p={2}
               borderRadius="md"
               title={platform.name}
-              minW="32px"
-              minH="32px"
+              minW="28px"
+              minH="28px"
               display="flex"
               alignItems="center"
               justifyContent="center"
+              border="1px solid"
+              borderColor={useColorModeValue('gray.200', 'gray.600')}
             >
-              <Text fontSize="sm" fontWeight="bold">
+              <Text fontSize="md" fontWeight="normal" fontFamily="monospace">
                 {getPlatformIcon(platform.id)}
               </Text>
             </Box>
