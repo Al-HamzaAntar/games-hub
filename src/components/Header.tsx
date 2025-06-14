@@ -6,8 +6,10 @@ import {
   InputGroup,
   InputLeftElement,
   HStack,
-  useColorModeValue,
+  Switch,
   Text,
+  useColorMode,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { Search } from 'lucide-react';
 
@@ -17,6 +19,7 @@ interface HeaderProps {
 }
 
 const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const headerBg = useColorModeValue('white', 'gray.900');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
   const inputBg = useColorModeValue('gray.100', 'gray.800');
@@ -34,37 +37,49 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
       top={0}
       zIndex={100}
     >
-      <Flex justify="space-between" align="center">
-        <HStack spacing={4} flex="1">
-          <Box
-            bg={logoColor}
-            p={2}
-            borderRadius="lg"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text fontSize="xl" color="white">🎮</Text>
-          </Box>
-          <InputGroup maxW="600px" flex="1">
-            <InputLeftElement>
-              <Search size={20} color="gray" />
-            </InputLeftElement>
-            <Input
-              placeholder="Search games..."
-              value={searchQuery}
-              onChange={(e) => onSearchChange(e.target.value)}
-              bg={inputBg}
-              border="none"
-              _placeholder={{ color: 'gray.400' }}
-              _focus={{ boxShadow: '0 0 0 2px purple.500' }}
-            />
-          </InputGroup>
+      <Flex align="center">
+        {/* Logo */}
+        <Box
+          bg={logoColor}
+          p={2}
+          borderRadius="lg"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          mr={4}
+        >
+          <Text fontSize="xl" color="white">🎮</Text>
+        </Box>
+        
+        {/* Search Input */}
+        <InputGroup maxW="1000px" flex="1" mr={4}>
+          <InputLeftElement>
+            <Search size={20} color="gray" />
+          </InputLeftElement>
+          <Input
+            placeholder="Search games..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            bg={inputBg}
+            border="none"
+            _placeholder={{ color: 'gray.400' }}
+            _focus={{ boxShadow: '0 0 0 2px purple.500' }}
+          />
+        </InputGroup>
+
+        {/* Dark Mode Toggle */}
+        <HStack spacing={2}>
+          <Text color={textColor} fontSize="sm">Dark Mode</Text>
+          <Switch
+            isChecked={colorMode === 'dark'}
+            onChange={toggleColorMode}
+            colorScheme="purple"
+          />
         </HStack>
-        {/* Removed the Dark Mode toggle */}
       </Flex>
     </Box>
   );
 };
 
 export default Header;
+
