@@ -5,11 +5,9 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Switch,
-  Text,
-  useColorMode,
   HStack,
   useColorModeValue,
+  Text,
 } from '@chakra-ui/react';
 import { Search } from 'lucide-react';
 
@@ -19,8 +17,6 @@ interface HeaderProps {
 }
 
 const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
-  const { colorMode, toggleColorMode } = useColorMode();
-  
   const headerBg = useColorModeValue('white', 'gray.900');
   const borderColor = useColorModeValue('gray.200', 'gray.700');
   const inputBg = useColorModeValue('gray.100', 'gray.800');
@@ -39,7 +35,7 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
       zIndex={100}
     >
       <Flex justify="space-between" align="center">
-        <HStack spacing={4}>
+        <HStack spacing={4} flex="1">
           <Box
             bg={logoColor}
             p={2}
@@ -50,8 +46,7 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
           >
             <Text fontSize="xl" color="white">🎮</Text>
           </Box>
-          
-          <InputGroup maxW="400px">
+          <InputGroup maxW="600px" flex="1">
             <InputLeftElement>
               <Search size={20} color="gray" />
             </InputLeftElement>
@@ -66,15 +61,7 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
             />
           </InputGroup>
         </HStack>
-
-        <HStack spacing={4}>
-          <Text color={textColor} fontSize="sm">Dark Mode</Text>
-          <Switch
-            isChecked={colorMode === 'dark'}
-            onChange={toggleColorMode}
-            colorScheme="purple"
-          />
-        </HStack>
+        {/* Removed the Dark Mode toggle */}
       </Flex>
     </Box>
   );
