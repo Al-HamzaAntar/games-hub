@@ -24,6 +24,17 @@ const getPlatformIcon = (platformId: string) => {
     'xbox': '▢', // Outlined square for Xbox
     'switch': '▣', // Filled square with border for Nintendo
     'mobile': '▬', // Rectangle for mobile
+    'ios': '▬', // Rectangle for iOS
+    'android': '▬', // Rectangle for Android
+    'web': '◉', // Circle with dot for web
+    'mac': '◆', // Diamond for Mac
+    'linux': '▲', // Triangle for Linux
+    'nintendo': '▣', // Nintendo Switch
+    'atari': '◈', // Diamond outline for Atari
+    'commodore-amiga': '◇', // Diamond outline for Commodore/Amiga
+    'sega': '◎', // Double circle for SEGA
+    '3do': '◐', // Half circle for 3DO
+    'neo-geo': '◑', // Half circle inverted for Neo Geo
   };
   return iconMap[platformId] || '●';
 };
