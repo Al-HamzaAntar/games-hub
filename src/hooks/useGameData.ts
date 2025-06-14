@@ -1,3 +1,4 @@
+
 import { useQuery } from '@tanstack/react-query';
 import { gameApi } from '../services/gameApi';
 import { transformGame, transformGenre } from '../utils/gameTransformers';
@@ -68,8 +69,8 @@ export const useGenres = () => {
         }
       });
 
-      // Add "All Games" at the top for user convenience
-      return [{ id: '', name: 'All Games', icon: '🎮', count: 0 }, ...genres];
+      // Removed "All Games" from genres.
+      return genres;
     },
     staleTime: Infinity,
   });
