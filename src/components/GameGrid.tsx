@@ -1,4 +1,5 @@
 
+
 import {
   Box,
   SimpleGrid,
@@ -64,23 +65,29 @@ const GameGrid = ({
           <HStack spacing={4}>
             {/* Platforms Dropdown */}
             <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[180px] bg-muted">
+              <SelectTrigger className="w-[180px] bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
                 <SelectValue>
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent
-                className="bg-background z-[9999] w-[220px] max-h-72 overflow-auto shadow-xl border border-border"
+                className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto"
                 style={{
-                  backgroundColor: 'var(--background, #fff)',
+                  backgroundColor: 'white',
+                  color: 'black',
                   zIndex: 9999,
                   minWidth: 180,
                   maxWidth: 260,
-                  overflowY: 'auto'
+                  overflowY: 'auto',
+                  border: '2px solid #d1d5db'
                 }}
               >
                 {platformOptions.map(option => (
-                  <SelectItem key={option.id} value={option.id}>
+                  <SelectItem 
+                    key={option.id} 
+                    value={option.id}
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2"
+                  >
                     {option.label}
                   </SelectItem>
                 ))}
@@ -88,23 +95,29 @@ const GameGrid = ({
             </ShadSelect>
             {/* Order By Dropdown */}
             <ShadSelect value={orderBy} onValueChange={setOrderBy}>
-              <SelectTrigger className="w-[200px] bg-muted">
+              <SelectTrigger className="w-[200px] bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
                 <SelectValue>
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent
-                className="bg-background z-[9999] w-[260px] max-h-72 overflow-auto shadow-xl border border-border"
+                className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto"
                 style={{
-                  backgroundColor: 'var(--background, #fff)',
+                  backgroundColor: 'white',
+                  color: 'black',
                   zIndex: 9999,
                   minWidth: 200,
                   maxWidth: 300,
-                  overflowY: 'auto'
+                  overflowY: 'auto',
+                  border: '2px solid #d1d5db'
                 }}
               >
                 {orderOptions.map(option => (
-                  <SelectItem key={option.id} value={option.id}>
+                  <SelectItem 
+                    key={option.id} 
+                    value={option.id}
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2"
+                  >
                     {option.label}
                   </SelectItem>
                 ))}
