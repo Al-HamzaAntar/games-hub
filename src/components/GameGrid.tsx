@@ -1,5 +1,3 @@
-
-
 import {
   Box,
   SimpleGrid,
@@ -70,12 +68,12 @@ const GameGrid = ({
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
+              <SelectContent className="bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-500 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
                 {platformOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
                     value={option.id}
-                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2"
+                    className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-700"
                   >
                     {option.label}
                   </SelectItem>
@@ -89,12 +87,12 @@ const GameGrid = ({
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
+              <SelectContent className="bg-white dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-500 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
                 {orderOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
                     value={option.id}
-                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2"
+                    className="text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-700"
                   >
                     {option.label}
                   </SelectItem>
@@ -132,4 +130,3 @@ const GameGrid = ({
 };
 
 export default GameGrid;
-
