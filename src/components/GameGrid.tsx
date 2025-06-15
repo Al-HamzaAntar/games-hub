@@ -41,7 +41,43 @@ const GameGrid = ({
 }: GameGridProps) => {
   const textColor = useColorModeValue('gray.800', 'white');
   const labelColor = useColorModeValue('gray.600', 'gray.400');
-  
+
+  // Find selected labels
+  const selectedPlatformLabel = platformOptions.find(o => o.id === selectedPlatform)?.label;
+  const selectedGenreLabel = selectedGenre
+    ? (
+        // Try to get label from genre id (match Rawg API and fallback to capitalized id)
+        (() => {
+          // Note: We don't have genre options directly here,
+          // but GameGrid always receives games, so infer from games if needed
+          const genreName =
+            games.length > 0
+              ? games.find(g =>
+                  g.genres && g.genres.some(genreObj => genreObj.id === selectedGenre)
+                )?.genres.find(genreObj => genreObj.id === selectedGenre)?.name
+              : undefined;
+          // If not from games (empty list!), fallback to show the raw id
+          return genreName || selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1);
+        })()
+      )
+    : undefined;
+  // However, for robust display, if selectedGenre is blank, don't show genre
+
+  // Format header
+  let gridTitle = 'Games';
+  if (
+    (selectedPlatform && selectedPlatform !== 'all') ||
+    (selectedGenre && selectedGenre !== '')
+  ) {
+    gridTitle = [
+      selectedPlatform && selectedPlatform !== 'all' ? selectedPlatformLabel : null,
+      selectedGenre && selectedGenre !== '' ? selectedGenreLabel : null,
+      'Games',
+    ]
+      .filter(Boolean)
+      .join(' ');
+  }
+
   if (error) {
     return (
       <Box flex={1} p={6}>
@@ -59,7 +95,7 @@ const GameGrid = ({
         {/* Header */}
         <HStack justify="space-between" align="center">
           <Text fontSize="3xl" fontWeight="bold" color={textColor}>
-            Games
+            {gridTitle}
           </Text>
           <HStack spacing={4}>
             {/* Platforms Dropdown */}
