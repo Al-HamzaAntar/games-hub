@@ -36,15 +36,41 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
       top={0}
       zIndex={100}
     >
-      <Flex align="center">
-        {/* Logo */}
+      <Flex align="center" justify="space-between" width="100%">
+        {/* Left: Dark Mode Toggle */}
+        <HStack spacing={2} minW="150px">
+          <Text color={textColor} fontSize="sm">Dark Mode</Text>
+          <Switch
+            isChecked={colorMode === 'dark'}
+            onChange={toggleColorMode}
+            colorScheme="purple"
+          />
+        </HStack>
+
+        {/* Center: Search Bar fills the space between left and right */}
+        <InputGroup maxW="1000px" flex="1" mx={6}>
+          <InputLeftElement>
+            <Search size={20} color="gray" />
+          </InputLeftElement>
+          <Input
+            placeholder="Search games..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            bg={inputBg}
+            border="none"
+            _placeholder={{ color: 'gray.400' }}
+            _focus={{ boxShadow: '0 0 0 2px purple.500' }}
+          />
+        </InputGroup>
+
+        {/* Right: Logo */}
         <Box
           p={0}
           borderRadius="lg"
           display="flex"
           alignItems="center"
           justifyContent="center"
-          mr={4}
+          ml={4}
           bg="transparent"
           minW="44px"
           minH="44px"
@@ -61,35 +87,10 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
             }}
           />
         </Box>
-        
-        {/* Search Input */}
-        <InputGroup maxW="1000px" flex="1" mr={4}>
-          <InputLeftElement>
-            <Search size={20} color="gray" />
-          </InputLeftElement>
-          <Input
-            placeholder="Search games..."
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            bg={inputBg}
-            border="none"
-            _placeholder={{ color: 'gray.400' }}
-            _focus={{ boxShadow: '0 0 0 2px purple.500' }}
-          />
-        </InputGroup>
-
-        {/* Dark Mode Toggle */}
-        <HStack spacing={2}>
-          <Text color={textColor} fontSize="sm">Dark Mode</Text>
-          <Switch
-            isChecked={colorMode === 'dark'}
-            onChange={toggleColorMode}
-            colorScheme="purple"
-          />
-        </HStack>
       </Flex>
     </Box>
   );
 };
 
 export default Header;
+
