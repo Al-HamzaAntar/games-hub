@@ -62,8 +62,8 @@ const Header = ({ searchQuery, onSearchChange }: HeaderProps) => {
           />
         </Box>
 
-        {/* Search Bar fills the space between logo and dark mode toggle */}
-        <InputGroup maxW="1000px" flex="1" mx={6}>
+        {/* Search Bar fills the space between logo and dark mode toggle (no gap) */}
+        <InputGroup maxW="1000px" flex="1">
           <InputLeftElement>
             <Search size={20} color="gray" />
           </InputLeftElement>
