@@ -1,4 +1,3 @@
-
 import {
   Box,
   SimpleGrid,
@@ -44,26 +43,14 @@ const GameGrid = ({
 
   // Find selected labels
   const selectedPlatformLabel = platformOptions.find(o => o.id === selectedPlatform)?.label;
-  const selectedGenreLabel = selectedGenre
-    ? (
-        // Try to get label from genre id (match Rawg API and fallback to capitalized id)
-        (() => {
-          // Note: We don't have genre options directly here,
-          // but GameGrid always receives games, so infer from games if needed
-          const genreName =
-            games.length > 0
-              ? games.find(g =>
-                  g.genres && g.genres.some(genreObj => genreObj.id === selectedGenre)
-                )?.genres.find(genreObj => genreObj.id === selectedGenre)?.name
-              : undefined;
-          // If not from games (empty list!), fallback to show the raw id
-          return genreName || selectedGenre.charAt(0).toUpperCase() + selectedGenre.slice(1);
-        })()
-      )
-    : undefined;
-  // However, for robust display, if selectedGenre is blank, don't show genre
 
-  // Format header
+  // Capitalize helper
+  const capitalize = (s: string) => s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
+
+  // For genres, just use the selectedGenre id (capitalized), since we don't have a label mapping here
+  const selectedGenreLabel = selectedGenre ? capitalize(selectedGenre) : undefined;
+
+  // Format header: Show "PC Action Games" if filtered, otherwise just "Games"
   let gridTitle = 'Games';
   if (
     (selectedPlatform && selectedPlatform !== 'all') ||
