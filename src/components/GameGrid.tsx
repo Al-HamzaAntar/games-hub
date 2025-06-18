@@ -1,3 +1,4 @@
+
 import {
   Box,
   SimpleGrid,
@@ -67,7 +68,7 @@ const GameGrid = ({
 
   if (error) {
     return (
-      <Box flex={1} p={6}>
+      <Box flex={1} p={{ base: 4, md: 6 }}>
         <Alert status="error">
           <AlertIcon />
           Failed to load games. Please try again later.
@@ -77,17 +78,28 @@ const GameGrid = ({
   }
 
   return (
-    <Box flex={1} p={6}>
+    <Box flex={1} p={{ base: 4, md: 6 }}>
       <VStack spacing={6} align="stretch">
         {/* Header */}
-        <HStack justify="space-between" align="center">
-          <Text fontSize="3xl" fontWeight="bold" color={textColor}>
+        <VStack spacing={4} align="stretch">
+          <Text 
+            fontSize={{ base: "2xl", md: "3xl" }} 
+            fontWeight="bold" 
+            color={textColor}
+            textAlign={{ base: "center", md: "left" }}
+          >
             {gridTitle}
           </Text>
-          <HStack spacing={4}>
+          
+          <HStack 
+            spacing={4} 
+            justify={{ base: "center", md: "flex-end" }}
+            flexWrap="wrap"
+            gap={2}
+          >
             {/* Platforms Dropdown */}
             <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[180px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
+              <SelectTrigger className="w-[140px] sm:w-[180px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
                 <SelectValue>
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
@@ -104,9 +116,10 @@ const GameGrid = ({
                 ))}
               </SelectContent>
             </ShadSelect>
+            
             {/* Order By Dropdown */}
             <ShadSelect value={orderBy} onValueChange={setOrderBy}>
-              <SelectTrigger className="w-[200px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
+              <SelectTrigger className="w-[160px] sm:w-[200px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
                 <SelectValue>
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
@@ -124,10 +137,11 @@ const GameGrid = ({
               </SelectContent>
             </ShadSelect>
           </HStack>
-        </HStack>
+        </VStack>
+
         {/* Loading State */}
         {isLoading ? (
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3, xl: 4 }} spacing={{ base: 4, md: 6 }}>
             {Array.from({ length: 12 }).map((_, index) => (
               <Box 
                 key={index}
@@ -148,7 +162,7 @@ const GameGrid = ({
           </SimpleGrid>
         ) : (
           games.length > 0 ? (
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing={6}>
+            <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3, xl: 4 }} spacing={{ base: 4, md: 6 }}>
               {games.map((game) => (
                 <GameCard key={game.id} game={game} />
               ))}

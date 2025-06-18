@@ -1,5 +1,6 @@
+
 import { useState } from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import GameGrid from '../components/GameGrid';
@@ -69,6 +70,10 @@ const Index = () => {
   const { data: genres = [], isLoading: genresLoading } = useGenres();
 
   const bgColor = useColorModeValue('gray.50', 'gray.900');
+  
+  // Responsive breakpoint - hide sidebar on mobile, show on desktop
+  const showSidebar = useBreakpointValue({ base: false, lg: true });
+  const sidebarWidth = useBreakpointValue({ base: '0', lg: '280px' });
 
   return (
     <Box minH="100vh" bg={bgColor}>
@@ -78,12 +83,14 @@ const Index = () => {
       />
 
       <Flex>
-        <Sidebar 
-          selectedGenre={selectedGenre}
-          onGenreSelect={setSelectedGenre}
-          genres={genres}
-          isLoading={genresLoading}
-        />
+        {showSidebar && (
+          <Sidebar 
+            selectedGenre={selectedGenre}
+            onGenreSelect={setSelectedGenre}
+            genres={genres}
+            isLoading={genresLoading}
+          />
+        )}
 
         <GameGrid 
           games={games}
