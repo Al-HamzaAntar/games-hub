@@ -1,9 +1,9 @@
-
 import { useState } from 'react';
 import { Box, Flex, useBreakpointValue } from '@chakra-ui/react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import GameGrid from '../components/GameGrid';
+import MobileGenresDrawer from '../components/MobileGenresDrawer';
 import { useGames, useGenres } from '../hooks/useGameData';
 import { useColorModeValue } from '@chakra-ui/react';
 
@@ -58,6 +58,7 @@ const Index = () => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedPlatform, setSelectedPlatform] = useState('all');
   const [orderBy, setOrderBy] = useState('relevance');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Map selectedPlatform string to platform ID for API, or undefined for "all"
   const platformFilter = selectedPlatform === 'all' ? undefined : platformIdMap[selectedPlatform];
@@ -79,7 +80,8 @@ const Index = () => {
     <Box minH="100vh" bg={bgColor}>
       <Header 
         searchQuery={searchQuery} 
-        onSearchChange={setSearchQuery} 
+        onSearchChange={setSearchQuery}
+        onMobileMenuToggle={() => setIsMobileMenuOpen(true)}
       />
 
       <Flex>
@@ -105,6 +107,15 @@ const Index = () => {
           orderOptions={orderOptions}
         />
       </Flex>
+
+      <MobileGenresDrawer
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        selectedGenre={selectedGenre}
+        onGenreSelect={setSelectedGenre}
+        genres={genres}
+        isLoading={genresLoading}
+      />
     </Box>
   );
 };
