@@ -99,17 +99,17 @@ const GameGrid = ({
           >
             {/* Platforms Dropdown */}
             <ShadSelect value={selectedPlatform} onValueChange={setSelectedPlatform}>
-              <SelectTrigger className="w-[140px] sm:w-[180px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
+              <SelectTrigger className="w-[140px] sm:w-[180px] bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-800">
                 <SelectValue>
                   {platformOptions.find(o => o.id === selectedPlatform)?.label || 'Platforms'}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-black border border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
+              <SelectContent className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[220px] max-h-72 overflow-auto">
                 {platformOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
                     value={option.id}
-                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-800"
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-700"
                   >
                     {option.label}
                   </SelectItem>
@@ -119,17 +119,17 @@ const GameGrid = ({
             
             {/* Order By Dropdown */}
             <ShadSelect value={orderBy} onValueChange={setOrderBy}>
-              <SelectTrigger className="w-[160px] sm:w-[200px] bg-white dark:bg-black border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-900">
+              <SelectTrigger className="w-[160px] sm:w-[200px] bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white shadow-md hover:bg-gray-50 dark:hover:bg-gray-800">
                 <SelectValue>
                   {`Order by: ${orderOptions.find(opt => opt.id === orderBy)?.label || "Relevance"}`}
                 </SelectValue>
               </SelectTrigger>
-              <SelectContent className="bg-white dark:bg-black border border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
+              <SelectContent className="bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 shadow-2xl z-[9999] w-[260px] max-h-72 overflow-auto">
                 {orderOptions.map(option => (
                   <SelectItem 
                     key={option.id} 
                     value={option.id}
-                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-800"
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer px-3 py-2 focus:bg-gray-100 dark:focus:bg-gray-700"
                   >
                     {option.label}
                   </SelectItem>
